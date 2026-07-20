@@ -116,7 +116,7 @@ public class GuiQuestPicker extends GuiScreen {
             int catIndex = catScroll + i;
             if (catIndex < categories.size()) {
                 catButton.visible = true;
-                catButton.displayString = categories.get(catIndex).title;
+                catButton.displayString = trimToButtonWidth(categories.get(catIndex).title, catButton.getButtonWidth());
             } else {
                 catButton.visible = false;
             }
@@ -125,11 +125,29 @@ public class GuiQuestPicker extends GuiScreen {
             int questIndex = questScroll + i;
             if (questIndex < quests.size()) {
                 questButton.visible = true;
-                questButton.displayString = quests.get(questIndex).title;
+                questButton.displayString = trimToButtonWidth(
+                    quests.get(questIndex).title,
+                    questButton.getButtonWidth());
             } else {
                 questButton.visible = false;
             }
         }
+    }
+
+    /**
+     * GuiButton.drawButton() centers its displayString without any width clamp
+     * or ellipsis of its own, so a title longer than the button just overflows
+     * past both edges - visually this looked like the row text getting clipped
+     * by its neighbors. Truncate with an ellipsis instead, leaving a few pixels
+     * of padding on each side of the button.
+     */
+    private String trimToButtonWidth(String text, int buttonWidth) {
+        int maxWidth = buttonWidth - 6;
+        if (fontRendererObj.getStringWidth(text) <= maxWidth) return text;
+        while (text.length() > 1 && fontRendererObj.getStringWidth(text + "…") > maxWidth) {
+            text = text.substring(0, text.length() - 1);
+        }
+        return text + "…";
     }
 
     private GuiButton getButton(int id) {

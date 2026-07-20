@@ -80,8 +80,11 @@ public class GuiCoordinateRecorder extends GuiScreen {
 
         labelField = new GuiTextField(fontRendererObj, centerX - 100, NOTE_ROW_Y, 140, 16);
         labelField.setMaxStringLength(64);
+        labelField.setVisible(selectedQuest != null);
 
-        buttonList.add(new GuiButton(1, centerX + 44, NOTE_ROW_Y - 2, 56, 20, "添加当前点"));
+        GuiButton addPointButton = new GuiButton(1, centerX + 44, NOTE_ROW_Y - 2, 56, 20, "添加当前点");
+        addPointButton.visible = selectedQuest != null;
+        buttonList.add(addPointButton);
 
         for (int i = 0; i < ROWS_VISIBLE; i++) {
             int rowY = LIST_TOP + i * ROW_HEIGHT;
@@ -234,7 +237,9 @@ public class GuiCoordinateRecorder extends GuiScreen {
             drawCenteredString(fontRendererObj, "请先选择一个任务", centerX, LIST_TOP + 60, 0xFF5555);
         }
 
-        drawString(fontRendererObj, "备注(可选):", centerX - 100, NOTE_LABEL_Y, 0xAAAAAA);
+        if (selectedQuest != null) {
+            drawString(fontRendererObj, "备注(可选):", centerX - 100, NOTE_LABEL_Y, 0xAAAAAA);
+        }
 
         if (points.isEmpty() && selectedQuest != null) {
             drawCenteredString(fontRendererObj, "该任务暂无坐标点", centerX, LIST_TOP + 30, 0x888888);
@@ -253,7 +258,9 @@ public class GuiCoordinateRecorder extends GuiScreen {
         // otherwise the button backgrounds paint over and hide our labels.
         super.drawScreen(mouseX, mouseY, partialTicks);
 
-        labelField.drawTextBox();
+        if (selectedQuest != null) {
+            labelField.drawTextBox();
+        }
 
         for (int i = 0; i < ROWS_VISIBLE; i++) {
             int rowIndex = scrollOffset + i;
@@ -286,7 +293,12 @@ public class GuiCoordinateRecorder extends GuiScreen {
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int button) {
         super.mouseClicked(mouseX, mouseY, button);
-        labelField.mouseClicked(mouseX, mouseY, button);
+        // GuiTextField.mouseClicked() does not itself check getVisible(), so a hidden
+        // (pre-quest-selection) field would otherwise still grab focus/keyboard input
+        // from clicks landing on its old screen position.
+        if (selectedQuest != null) {
+            labelField.mouseClicked(mouseX, mouseY, button);
+        }
         if (renameField != null) {
             boolean wasFocused = renameField.isFocused();
             renameField.mouseClicked(mouseX, mouseY, button);
@@ -306,7 +318,7 @@ public class GuiCoordinateRecorder extends GuiScreen {
             renameField.textboxKeyTyped(typedChar, keyCode);
             return;
         }
-        if (labelField.isFocused()) {
+        if (selectedQuest != null && labelField.isFocused()) {
             if (keyCode == Keyboard.KEY_RETURN) {
                 addCurrentPoint();
                 return;
@@ -320,7 +332,9 @@ public class GuiCoordinateRecorder extends GuiScreen {
     @Override
     public void updateScreen() {
         super.updateScreen();
-        labelField.updateCursorCounter();
+        if (selectedQuest != null) {
+            labelField.updateCursorCounter();
+        }
         if (renameField != null) renameField.updateCursorCounter();
     }
 
