@@ -5,6 +5,7 @@ import com.github.postyizhan.questpointer.network.NetworkHandler;
 import com.github.postyizhan.questpointer.quest.QuestPointerController;
 import com.github.postyizhan.questpointer.quest.QuestTrackingTicker;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -19,9 +20,14 @@ public class CommonProxy {
 
         GameRegistry.registerItem(ItemCoordinateRecorder.INSTANCE, "coordinateRecorder");
         NetworkHandler.init();
+        // TickEvent.ServerTickEvent is posted on FMLCommonHandler's bus, NOT on
+        // MinecraftForge.EVENT_BUS - registering there means onServerTick() would
+        // silently never fire and the tracked-quest poll would be dead code.
         // Registered once at mod load (preInit runs a single time per game launch), the
         // ticker itself re-reads the player list every tick so it survives world reloads.
-        net.minecraftforge.common.MinecraftForge.EVENT_BUS.register(new QuestTrackingTicker());
+        FMLCommonHandler.instance()
+            .bus()
+            .register(new QuestTrackingTicker());
 
         QuestPointerMod.LOG.info("QuestPointer preInit complete");
     }
