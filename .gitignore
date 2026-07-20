@@ -1,0 +1,57 @@
+.gradle
+.settings
+/.idea/
+/.vscode/
+/run/
+/build/
+/eclipse/
+.classpath
+.project
+/bin/
+/config/
+/crash-reports/
+/logs/
+options.txt
+/saves/
+usernamecache.json
+banned-ips.json
+banned-players.json
+eula.txt
+ops.json
+server.properties
+servers.dat
+usercache.json
+whitelist.json
+/out/
+*.iml
+*.ipr
+*.iws
+*.bat
+*.DS_Store
+!gradlew.bat
+.factorypath
+addon.local.gradle
+addon.local.gradle.kts
+addon.late.local.gradle
+addon.late.local.gradle.kts
+layout.json
+
+./CustomNPC-Plus
+
+# Reference-only local clone of CustomNPC+'s source (its own git repo, used for
+# reading APIs/behavior while developing this mod); not part of this project.
+/CustomNPC-Plus/
+
+# Third-party mod jar used only for local compile/runtime linking (see dependencies.gradle);
+# not our code, not redistributed from this repo.
+/libs/
+
+# IDE incremental compiler output
+/bin/
+
+# Subagent debug artifacts from AI-assisted development sessions
+/.pi-subagents/
+
+# Stray empty file occasionally created by shell redirection mistakes on Windows
+nul
+

@@ -1,0 +1,21 @@
+{
+	"modListVersion": 2,
+	"modList": [{
+		"modid": "${modId}",
+		"name": "${modName}",
+		"description": "Adds a coordinate recorder for CustomNPC+ quests: attach one or more waypoints to a quest and show a direction indicator on screen while it is tracked.",
+		"version": "${modVersion}",
+		"mcversion": "${minecraftVersion}",
+		"url": "https://github.com/postyizhan/CustomNpcs-Quest-Pointer",
+		"updateUrl": "",
+		"authorList": ["postyizhan"],
+		"credits": "KAMKEEL and contributors for CustomNPC+",
+		"logoFile": "",
+		"screenshots": [],
+		"parent": "",
+		"requiredMods": ["customnpcs"],
+		"dependencies": ["customnpcs"],
+		"dependants": [],
+		"useDependencyInformation": true
+	}]
+}
