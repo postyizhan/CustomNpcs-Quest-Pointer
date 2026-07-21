@@ -1,1 +1,13 @@
 item.questpointer.coordinateRecorder.name=坐标记录仪
+questpointer.gui.questPicker.title=选择任务
+questpointer.gui.questPicker.view.all=全部任务
+questpointer.gui.questPicker.view.active=进行中
+questpointer.gui.questPicker.view.finished=已完成
+questpointer.gui.questPicker.category=分类
+questpointer.gui.questPicker.search=任务（可搜索）
+questpointer.gui.questPicker.cancel=取消
+questpointer.gui.questPicker.selectCategory=请先选择一个分类
+questpointer.gui.questPicker.empty.active=暂无进行中的任务
+questpointer.gui.questPicker.empty.finished=暂无已完成的任务
+questpointer.gui.questPicker.empty.search=没有匹配的任务
+questpointer.gui.questPicker.empty.general=暂无任务

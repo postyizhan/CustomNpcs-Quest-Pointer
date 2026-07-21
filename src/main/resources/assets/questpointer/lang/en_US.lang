@@ -1,1 +1,13 @@
 item.questpointer.coordinateRecorder.name=Coordinate Recorder
+questpointer.gui.questPicker.title=Select Quest
+questpointer.gui.questPicker.view.all=All Quests
+questpointer.gui.questPicker.view.active=In Progress
+questpointer.gui.questPicker.view.finished=Completed
+questpointer.gui.questPicker.category=Category
+questpointer.gui.questPicker.search=Quests (Searchable)
+questpointer.gui.questPicker.cancel=Cancel
+questpointer.gui.questPicker.selectCategory=Select a category
+questpointer.gui.questPicker.empty.active=No quests in progress
+questpointer.gui.questPicker.empty.finished=No completed quests
+questpointer.gui.questPicker.empty.search=No matching quests
+questpointer.gui.questPicker.empty.general=No quests

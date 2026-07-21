@@ -37,4 +37,6 @@ dependencies {
     // CustomNPC+ is required at both compile-time and runtime, but is not bundled or
     // published as a transitive dependency - server owners must install it separately.
     devOnlyNonPublishable(rfg.deobf(project.files("libs/CustomNPC-Plus-1.11.1.jar")))
+
+    testImplementation("junit:junit:4.13.2")
 }
